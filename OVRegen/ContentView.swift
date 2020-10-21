@@ -3,18 +3,23 @@
 //  OVRegen
 //
 //  Created by Tim Hobbes on 20/09/2020.
-//
 
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView {
+            VStack {
+                PlannerView()
+                NavigationLink(destination: RoutesView()) {
+                    Text("Plan!?").font(.title)
+                }
+                Spacer()
+            }.navigationTitle("💦 🚌/🚴‍♀️ OVRegen")
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
-//TEST
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
