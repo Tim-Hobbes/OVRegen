@@ -9,7 +9,10 @@ import SwiftUI
 
 struct RoutesView: View {
     var body: some View {
-        Text("Hier komen de routes te staan!")
+        Text("Hier komen de routes te staan!").onAppear {
+            //print("Hello world!!!")
+            NegenTweeNegenTweeApi().getRoutes(fromId: "station-amsterdam-centraal", toId: "station-eindhoven", departureTime: Date())
+        }
     }
 }
 

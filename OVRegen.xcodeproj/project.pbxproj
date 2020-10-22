@@ -15,6 +15,8 @@
 		31186C0825175C4600D90BE1 /* OVRegenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31186C0725175C4600D90BE1 /* OVRegenUITests.swift */; };
 		31186C1F25175F5200D90BE1 /* PlannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31186C1E25175F5200D90BE1 /* PlannerView.swift */; };
 		31186C3325178BAA00D90BE1 /* RoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31186C3225178BAA00D90BE1 /* RoutesView.swift */; };
+		31BDB8A62540296E00D46059 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BDB8A52540296E00D46059 /* Data.swift */; };
+		31BDB8AE25402C7700D46059 /* 9292routelist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BDB8AD25402C7700D46059 /* 9292routelist.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		31186C0925175C4600D90BE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31186C1E25175F5200D90BE1 /* PlannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerView.swift; sourceTree = "<group>"; };
 		31186C3225178BAA00D90BE1 /* RoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesView.swift; sourceTree = "<group>"; };
+		31BDB8A52540296E00D46059 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		31BDB8AD25402C7700D46059 /* 9292routelist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 9292routelist.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,8 @@
 			children = (
 				31186C2E25178AA700D90BE1 /* Views */,
 				31186BEC25175C4100D90BE1 /* ContentView.swift */,
+				31BDB8A52540296E00D46059 /* Data.swift */,
+				31BDB8AD25402C7700D46059 /* 9292routelist.swift */,
 				31186BEA25175C4100D90BE1 /* OVRegenApp.swift */,
 				31186BEE25175C4500D90BE1 /* Assets.xcassets */,
 				31186BF325175C4500D90BE1 /* Info.plist */,
@@ -274,9 +280,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				31186C3325178BAA00D90BE1 /* RoutesView.swift in Sources */,
+				31BDB8A62540296E00D46059 /* Data.swift in Sources */,
 				31186BED25175C4100D90BE1 /* ContentView.swift in Sources */,
 				31186BEB25175C4100D90BE1 /* OVRegenApp.swift in Sources */,
 				31186C1F25175F5200D90BE1 /* PlannerView.swift in Sources */,
+				31BDB8AE25402C7700D46059 /* 9292routelist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
