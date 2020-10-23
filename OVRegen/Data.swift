@@ -25,8 +25,48 @@ class NegenTweeNegenTweeApi {
         var arrival: String
     }
     
+    struct Locations: Codable {
+        var locations: [Location]
+    }
     
-    func getRoutes (fromId: String, toId: String, departureTime: Date) {
+    struct Location: Codable {
+        var id: String
+    }
+    
+    
+    func getId (query: String, completion: @escaping (Locations) -> ()){
+        let escapedQuery  = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        
+        let urlString = "https://api.9292.nl/0.1/locations?lang=nl-NL&q=\(escapedQuery!)"
+        guard let url = URL(string: urlString) else {return}
+        
+        print (urlString)
+        print (url)
+        
+        URLSession.shared.dataTask(with: url) { (data, _, _) in
+            if (data == nil) {
+                print("No data")
+                return
+            }
+            
+            //decode the json data
+            
+            let jsonDecoder = JSONDecoder()
+            let jsonCatalogs = try? jsonDecoder.decode(Locations.self, from: data!)
+            
+            if jsonCatalogs == nil {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                completion(jsonCatalogs!)
+            }
+            
+        }.resume()
+    }
+    
+    
+    func getRoutes (fromId: String, toId: String, departureTime: Date, completion: @escaping ([Journey]) -> ()) {
         //make swift understand the wird date notation the API
         let dateFormatter = DateFormatter();
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HHmm";
@@ -35,8 +75,7 @@ class NegenTweeNegenTweeApi {
         let urlString = "https://api.9292.nl/0.1/journeys?before=1&sequence=1&byFerry=true&bySubway=True&byBus=true&byTrain=true&lang=nl-NL&searchType=departure&interchangeTime=standard&after=5&from=\(fromId)&to=\(toId)&dateTime=\(dateFormatter.string(from: departureTime))"
         
         
-        guard let url = URL(string: urlString)
-        else {return}
+        guard let url = URL(string: urlString) else {return}
         
         print("URL = " + url.absoluteString)
         
@@ -50,37 +89,38 @@ class NegenTweeNegenTweeApi {
             //decode the json data
             
             let jsonDecoder = JSONDecoder()
-               
             let jsonCatalogs = try? jsonDecoder.decode(JsonJourneys.self, from: data!)
-            print (jsonCatalogs?.journeys[0].arrival)
             
             //tranlate the 9292 format to our format
             var journeys: [Journey] = []//init string of journeys
-            
-            
             guard let amoundOfJourneys = jsonCatalogs?.journeys.count else {return}
 
             //make swift understand the wird date notation the API, this is slightly different than in the one of the bigging of the function becasue the API return a time with a : between the hour and the minute
             let dateFormatter = DateFormatter();
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm";
-            dateFormatter.locale = Locale(identifier: "en_US_POSIX") //more reliable https://stackoverflow.com/questions/36861732/convert-string-to-date-in-swift
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX") //fixed a wird issue, don't know how it works
             
-            for i in 0...amoundOfJourneys-1 {
+            for i in 0...amoundOfJourneys-1 { //thow away the first journey because it is planned before the departure time
                 var journey = Journey()
 
                 //convert the string time that is returned form the API into swift Date objects, if it fails let it be now.
                 journey.arrivalTime = dateFormatter.date(from: jsonCatalogs!.journeys[i].arrival)
                 journey.beginTime = dateFormatter.date(from: jsonCatalogs!.journeys[i].departure)
                 
+                //generate the link to display more info about the journey
                 journey.link = self.generateLink(departure: journey.beginTime, from: fromId, to: toId);
                 
                 journeys.append(journey)
             }
             
+            DispatchQueue.main.async {
+                completion(journeys)
+            }
+            
             print(journeys)
             
         }
-        .resume()
+        .resume() //make the request!
     }
     
     func generateLink(departure: Date?, from: String?, to: String?) -> String? {
@@ -88,11 +128,15 @@ class NegenTweeNegenTweeApi {
         let dateFormatter = DateFormatter();
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HHmm";
         
-        if departure == nil || from == nil || to == nil { //check if all the values needed for the expression are available
-            return ""
+        if departure == nil || from == nil || to == nil { //check if all the values needed for the expression are available, optionals in String behave wirdly
+            return "https://9292.nl"
         }
         
-        let link: String = "https://9292.nl/reisadvies/\(from!)/\(to!)/vertrek/\(dateFormatter.string(from: departure!))?extraInterchangeTime=0"
+        //in the url the / in the id's are replaced with _
+        let fromUrlId = from!.replacingOccurrences(of: "/", with: "_")
+        let toUrlId = to!.replacingOccurrences(of: "/", with: "_")
+        
+        let link: String = "https://9292.nl/reisadvies/\(fromUrlId)/\(toUrlId)/vertrek/\(dateFormatter.string(from: departure!))?extraInterchangeTime=0"
         
         return link
     }

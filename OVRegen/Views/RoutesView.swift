@@ -8,10 +8,23 @@
 import SwiftUI
 
 struct RoutesView: View {
+    @State var journeys: [Journey] = []
+    
+    static let routeDateFormat: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }()
+    
     var body: some View {
-        Text("Hier komen de routes te staan!").onAppear {
-            //print("Hello world!!!")
-            NegenTweeNegenTweeApi().getRoutes(fromId: "station-amsterdam-centraal", toId: "station-eindhoven", departureTime: Date())
+        List(journeys) { journey in
+            Text("OV: \(journey.arrivalTime!, formatter: Self.routeDateFormat)")
+            }
+        
+        }.onAppear {
+            NegenTweeNegenTweeApi().getRoutes(fromId: "haarlem/lieoever-54", toId: "driehuis/wolff-en-dekenlaan-10", departureTime: Date()) { (journeys) in
+                self.journeys = journeys
+            }
         }
     }
 }
