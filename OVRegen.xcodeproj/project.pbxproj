@@ -17,6 +17,7 @@
 		31AC606A2545C99E00D52CA1 /* NegenTweeNegenTwee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AC60692545C99E00D52CA1 /* NegenTweeNegenTwee.swift */; };
 		31AC606F2545CA5C00D52CA1 /* OpenWeatherMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AC606E2545CA5C00D52CA1 /* OpenWeatherMap.swift */; };
 		31BDB8A62540296E00D46059 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BDB8A52540296E00D46059 /* Data.swift */; };
+		90367ECA2545C9A2006D99EB /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90367EC92545C9A2006D99EB /* Geocoding.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		31AC60692545C99E00D52CA1 /* NegenTweeNegenTwee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NegenTweeNegenTwee.swift; sourceTree = "<group>"; };
 		31AC606E2545CA5C00D52CA1 /* OpenWeatherMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherMap.swift; sourceTree = "<group>"; };
 		31BDB8A52540296E00D46059 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		90367EC92545C9A2006D99EB /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				31AC60682545C97C00D52CA1 /* API's */,
 				31186C2E25178AA700D90BE1 /* Views */,
 				31BDB8A52540296E00D46059 /* Data.swift */,
+				90367EC92545C9A2006D99EB /* Geocoding.swift */,
 				31186BEA25175C4100D90BE1 /* OVRegenApp.swift */,
 				31186BEE25175C4500D90BE1 /* Assets.xcassets */,
 				31186BF325175C4500D90BE1 /* Info.plist */,
@@ -287,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90367ECA2545C9A2006D99EB /* Geocoding.swift in Sources */,
 				31186C3325178BAA00D90BE1 /* RoutesView.swift in Sources */,
 				31AC606A2545C99E00D52CA1 /* NegenTweeNegenTwee.swift in Sources */,
 				31BDB8A62540296E00D46059 /* Data.swift in Sources */,
