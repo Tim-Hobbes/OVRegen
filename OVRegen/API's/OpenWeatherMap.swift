@@ -8,7 +8,7 @@
 import SwiftUI
 
 class OpenWeatherMapApi {
-    getRain (journey: Journey) {
+    func getRain (journey: Journey) {
         
     }
     
