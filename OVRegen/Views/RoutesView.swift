@@ -13,7 +13,7 @@ struct RoutesView: View {
     @State var planOrigin: String
     @State var planDestination: String
     
-    @State var timeToLeave = Date()
+    @State var timeToLeave: Date
     
     @State var rainHate: Double
     
@@ -34,19 +34,13 @@ struct RoutesView: View {
                 }
             }
         }.onAppear {
-            NegenTweeNegenTweeApi().getId(query: planDestination) { (locations) in
-                print(locations)
-            }
-            
-//            NegenTweeNegenTweeApi().getRoutes(fromId: "haarlem/lieoever-54", toId: "driehuis/wolff-en-dekenlaan-10", departureTime: Date()) { (journeys) in
-//                self.journeys = journeys
-//            }
+            mainLogic().bikeOrOV(origin: planOrigin, destination: planDestination, timeToLeave: timeToLeave, rainHate: rainHate)
         }.navigationBarTitle("Routes")
     }
 }
 
 struct RoutesView_Previews: PreviewProvider {
     static var previews: some View {
-        RoutesView(planOrigin: "Lieoever 54", planDestination: "Wolff en dekenlaan 1", rainHate: 0.5)
+        RoutesView(planOrigin: "Lieoever 54", planDestination: "Wolff en dekenlaan 1", timeToLeave: Date(), rainHate: 0.5)
     }
 }
