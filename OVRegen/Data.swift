@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Journey: Codable, Identifiable {
-    let id = UUID()
+    var id = UUID()
     var arrivalTime: Date?
     var beginTime: Date?
     var link: String?
@@ -34,7 +34,7 @@ class NegenTweeNegenTweeApi {
     }
     
     
-    func getId (query: String, completion: @escaping (Locations) -> ()){
+    func getId (query: String, completion: @escaping (Location) -> ()){
         let escapedQuery  = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         
         let urlString = "https://api.9292.nl/0.1/locations?lang=nl-NL&q=\(escapedQuery!)"
@@ -58,8 +58,14 @@ class NegenTweeNegenTweeApi {
                 return
             }
             
+            print ("jsonCatalogs.locations.count = \(jsonCatalogs!.locations.count)")
+            
+            if jsonCatalogs!.locations.count == 0 {
+                return
+            }
+            
             DispatchQueue.main.async {
-                completion(jsonCatalogs!)
+                completion(jsonCatalogs!.locations[0])
             }
             
         }.resume()
@@ -100,7 +106,7 @@ class NegenTweeNegenTweeApi {
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm";
             dateFormatter.locale = Locale(identifier: "en_US_POSIX") //fixed a wird issue, don't know how it works
             
-            for i in 0...amoundOfJourneys-1 { //thow away the first journey because it is planned before the departure time
+            for i in 1...amoundOfJourneys-1 { //thow away the first journey because it is planned before the departure time
                 var journey = Journey()
 
                 //convert the string time that is returned form the API into swift Date objects, if it fails let it be now.
