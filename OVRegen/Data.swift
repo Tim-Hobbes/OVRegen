@@ -32,6 +32,7 @@ class mainLogic {
         }
         //calculate the possible routes with the 9292 api
         NegenTweeNegenTweeApi().getRoutes(from: origin, to: destination, departureTime: timeToLeave) { (journeys) in
+            OpenWeatherMapApi().getRain(journey: journeys[0])
             print (journeys[0].link)
         }
     }

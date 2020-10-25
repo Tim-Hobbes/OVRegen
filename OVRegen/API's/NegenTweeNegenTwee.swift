@@ -105,6 +105,8 @@ class NegenTweeNegenTweeApi {
                         //generate the link to display more info about the journey
                         journey.link = self.generateLink(departure: journey.beginTime, from: fromId.id, to: toId.id);
                         
+                        //set the origin
+                        journey.beginning = fromId.latLong
                         
                         //set the correct type
                         journey.type = 0
