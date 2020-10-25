@@ -24,17 +24,15 @@ class NegenTweeNegenTweeApi {
     
     struct Location: Codable {
         var id: String
+        var latLong: LatLong
     }
     
     
-    func getId (query: String, completion: @escaping (Location) -> ()){
+    func getLocation (query: String, completion: @escaping (Location) -> ()){
         let escapedQuery  = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         
         let urlString = "https://api.9292.nl/0.1/locations?lang=nl-NL&q=\(escapedQuery!)"
         guard let url = URL(string: urlString) else {return}
-        
-        print (urlString)
-        print (url)
         
         URLSession.shared.dataTask(with: url) { (data, _, _) in
             if (data == nil) {
@@ -51,8 +49,6 @@ class NegenTweeNegenTweeApi {
                 return
             }
             
-            print ("jsonCatalogs.locations.count = \(jsonCatalogs!.locations.count)")
-            
             if jsonCatalogs!.locations.count == 0 {
                 return
             }
@@ -66,8 +62,8 @@ class NegenTweeNegenTweeApi {
     
     
     func getRoutes (from: String, to: String, departureTime: Date, completion: @escaping ([Journey]) -> ()) {
-        self.getId(query: from) { (fromId) in
-            self.getId(query: to) { (toId) in
+        self.getLocation(query: from) { (fromId) in
+            self.getLocation(query: to) { (toId) in
                 //make swift understand the wird date notation the API
                 let dateFormatter = DateFormatter();
                 dateFormatter.dateFormat = "yyyy-MM-dd'T'HHmm";
@@ -77,8 +73,6 @@ class NegenTweeNegenTweeApi {
                 
                 
                 guard let url = URL(string: urlString) else {return}
-                
-                print("URL = " + url.absoluteString)
                 
                 URLSession.shared.dataTask(with: url) { (data, _, _) in //make a request to the 9292 servers, if it returns call this function with the argument data for the data of the function and ignore the response code and the error code.
                     if (data == nil) {
@@ -111,14 +105,16 @@ class NegenTweeNegenTweeApi {
                         //generate the link to display more info about the journey
                         journey.link = self.generateLink(departure: journey.beginTime, from: fromId.id, to: toId.id);
                         
+                        
+                        //set the correct type
+                        journey.type = 0
+                        
                         journeys.append(journey)
                     }
                     
                     DispatchQueue.main.async {
                         completion(journeys)
                     }
-                    
-                    print(journeys)
                     
                 }
                 .resume() //make the request!

@@ -13,7 +13,15 @@ struct Journey: Codable, Identifiable {
     var beginTime: Date?
     var link: String?
     
+    var type: Int? //0 for OV, 1 for bike
+    
     var rain: Double?
+    var beginning: LatLong?
+}
+
+struct LatLong: Codable {
+    var lat: Double
+    var long: Double
 }
 
 class mainLogic {

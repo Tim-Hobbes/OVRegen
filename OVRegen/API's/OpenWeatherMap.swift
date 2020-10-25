@@ -8,6 +8,8 @@
 import SwiftUI
 
 class OpenWeatherMapApi {
+    let key =
+    
     func getRain (journey: Journey) {
         
     }
