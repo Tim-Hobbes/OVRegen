@@ -17,10 +17,10 @@ class GraphhopperApi {
         var time: Int
     }
 
-    func getTime (fromLad: Double, fromLng: Double, toLad: Double, toLng: Double, completion: @escaping (Paths) -> ()){
+    func getTime (from: LatLong, to: LatLong, startTime: Date, completion: @escaping (Paths) -> ()){
         let key = "a2315e51-801e-440c-93ad-8c890ec4fddb"
         
-        let urlString = "https://graphhopper.com/api/1/route?point=\(fromLad),\(fromLng)&point=\(toLad),\(toLng)&vehicle=bike&calc_points=false&key=\(key)"
+        let urlString = "https://graphhopper.com/api/1/route?point=\(from.lat),\(from.long )&point=\(to.lat),\(to.long)&vehicle=bike&calc_points=false&key=\(key)"
         guard let url = URL(string: urlString) else {return}
         
         print(url)
@@ -39,6 +39,13 @@ class GraphhopperApi {
             
             print(apiResult?.paths[0].time)
             
+            
+            var journey = Journey()
+            journey.beginTime = startTime
+            journey.arrivalTime = startTime + TimeInterval((apiResult?.paths[0].time)!/1000)
+            journey.type = 1
+            journey.beginning = from
+            journey.link = "https://www.google.com/maps/dir/?api=1&origin=\(from.lat),\(from.long)&destination=\(to.lat),\(to.long)&travelmode=bicycling"
           
             
             
