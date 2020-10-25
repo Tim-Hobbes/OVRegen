@@ -27,6 +27,9 @@ struct LatLong: Codable {
 class mainLogic {
     func bikeOrOV (origin: String, destination: String, timeToLeave: Date, rainHate: Double){
         
+        GraphhopperApi().getTime(fromLad: 52.3837866, fromLng: 4.6078594, toLad: 52.3550197, toLng: 4.6384034) { (paths) in
+            print(paths.time)
+        }
         //calculate the possible routes with the 9292 api
         NegenTweeNegenTweeApi().getRoutes(from: origin, to: destination, departureTime: timeToLeave) { (journeys) in
             print (journeys[0].link)
