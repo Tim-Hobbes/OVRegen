@@ -1,0 +1,15 @@
+# Verslag OVRegen
+Waarschijnlijk zijn er niet veel leerlingen die een individueel verslag inleveren voor een informatica project. Ik heb er echter voor kozen om buiten de opdracht om dit verslag in te leveren. Dit had ik gedaan nadat u in de les had gezegd dat het vooral over het pad naar het eindproduct toe ging. In dit document ga ik mijn stappen naar het eindproduct toe documenteren. 
+Voordat ik met dit project was gestart had ik nog nooit een mobile app gemaakt of ontworpen, met API’s gewerkt of Xcode gebruikt. Dit project heb ik gebruikt om mezelf een beetje bekend te maken in deze technieken. Omdat ik nog nooit gebruik had gemaakt van deze technieken waren mijn plannen voor de app in sommige opzichten veel te duur, en of veel te moeilijk. Zo was is origineel van plan rekeningen te houden met mogelijke regenval van het lopen van station naar station of van het lopen van station naar eindbestemming. Dit idee was om te beginnen erg duur, het opvragen op de minuut precies regen date kost ongeveer driehonderd euro per jaar. Dit budget hebben wij helaas niet. Om deze reden heb ik helaas deze functionaliteit moeten schrappen. Deze realisatie kwam laat in de ontwikkeling-cyclus. Zo laat zelfs dat het 9292 al volledig geïmplementeerd was. Hierom hebben we er voor gekozen om verschillende routes die je kan nemen weer te geven. Ik kon het namelijk niet over mijn hard verkrijgen om de circa 300 lijnen code en 5 uur weg te gooien omdat het niet in het programma van eisen stond. 
+Vanwege deze reden heb ik er voor gekozen om geen technische specificatie of plan te maken voor het schrijven van het programma. Er is echter wel een plan van aanpak en een programma van eisen gemaakt, zoals er in de opdracht stond. 
+Tijdens het programmeren van de app stuitte ik op een duidelijk probleem: in Swift is het goed programmeren van asynchrone functies erg moeilijk omdat Swift niet is ontworpen met comptabiliteit for asynchrone functies in gedacht, in tegenstelling to bijvoorbeeld JavaScript of Python. Om een voorbeeld te geven: dit is de code om de location id’s van het beginpunt van de route en het eindpunt van de routes op de vragen.
+```swift
+ NegenTweeNegenTweeApi().getId(query: origin) { (originId) in
+            NegenTweeNegenTweeApi().getId(query: destination) { (destinationId) in
+                NegenTweeNegenTweeApi().getRoutes(fromId: originId.id, toId: destinationId.id, departureTime: timeToLeave) { (journeys) in
+                	print(journeys)                  
+                }
+            }
+        }
+```
+Zoals u kunt zien is dit niet niet makkelijk te lezen en te begrijpen. U kunt zien dat voor iedere operatie die gedaan moet worden met het NegenTweeNegenTwee API er een nieuwe callback functie aangeroepen moet worden. Dit heeft als grote nadeel dat het niet mogelijk is om functies asynchroon aan te roepen: er moet gewacht worden op de ene API call voor de volgende om aangeroepen te worden. Met onze doelgroep in gedachte hebben wij besloten om met dit probleem te leven: de meeste mensen in Nederland hebben namelijk zo snel internet dat ze hier bijna geen last van hebben. 
