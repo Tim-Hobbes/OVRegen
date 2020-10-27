@@ -25,15 +25,20 @@ struct LatLong: Codable {
 }
 
 class mainLogic {
-    func bikeOrOV (origin: String, destination: String, timeToLeave: Date, rainHate: Double, competion: @escaping ([Journey]) -> ()){
+    func bikeOrOV (origin: String, destination: String, timeToLeave: Date, rainHate: Double, competion: @escaping (Int) -> ()){
         
-      
-        
-//        calculate the possible routes with the 9292 api
-        NegenTweeNegenTweeApi().getRoutes(from: origin, to: destination, departureTime: timeToLeave) { (journeys) in
+        GraphhopperApi().getTime(fromString: origin, toString: destination, startTime: timeToLeave) { (bikeJourney) in
+            var bikeOrOVInt: Int = 1
+            
+            let inverseRainHate = 1 - rainHate
+            
+            if bikeJourney.rain! >= inverseRainHate {
+                    print("fuck")
+                    bikeOrOVInt = 0
+            }
+            
             DispatchQueue.main.async {
-                print(journeys)
-                competion(journeys)
+                competion(bikeOrOVInt)
             }
         }
     }
