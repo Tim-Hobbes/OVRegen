@@ -34,6 +34,8 @@ class NegenTweeNegenTweeApi {
         let urlString = "https://api.9292.nl/0.1/locations?lang=nl-NL&q=\(escapedQuery!)"
         guard let url = URL(string: urlString) else {return}
         
+        print(urlString)
+        
         URLSession.shared.dataTask(with: url) { (data, _, _) in
             if (data == nil) {
                 print("No data")
@@ -44,6 +46,7 @@ class NegenTweeNegenTweeApi {
             
             let jsonDecoder = JSONDecoder()
             let jsonCatalogs = try? jsonDecoder.decode(Locations.self, from: data!)
+            
             
             if jsonCatalogs == nil {
                 return
@@ -73,8 +76,9 @@ class NegenTweeNegenTweeApi {
                 
                 
                 guard let url = URL(string: urlString) else {return}
-                
+
                 URLSession.shared.dataTask(with: url) { (data, _, _) in //make a request to the 9292 servers, if it returns call this function with the argument data for the data of the function and ignore the response code and the error code.
+                    
                     if (data == nil) {
                         print("No data")
                         return()

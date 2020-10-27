@@ -18,6 +18,7 @@
 		31AC606F2545CA5C00D52CA1 /* OpenWeatherMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AC606E2545CA5C00D52CA1 /* OpenWeatherMap.swift */; };
 		31BDB8A62540296E00D46059 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BDB8A52540296E00D46059 /* Data.swift */; };
 		900F8C182545DC150098B07C /* Graphhopper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900F8C172545DC150098B07C /* Graphhopper.swift */; };
+		90F7FB2525497EE70077B76B /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F7FB2425497EE70077B76B /* ResultsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		31AC606E2545CA5C00D52CA1 /* OpenWeatherMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherMap.swift; sourceTree = "<group>"; };
 		31BDB8A52540296E00D46059 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		900F8C172545DC150098B07C /* Graphhopper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphhopper.swift; sourceTree = "<group>"; };
+		90F7FB2425497EE70077B76B /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				31186BEC25175C4100D90BE1 /* ContentView.swift */,
+				90F7FB2425497EE70077B76B /* ResultsView.swift */,
 				31186C3225178BAA00D90BE1 /* RoutesView.swift */,
 			);
 			path = Views;
@@ -291,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				31186C3325178BAA00D90BE1 /* RoutesView.swift in Sources */,
+				90F7FB2525497EE70077B76B /* ResultsView.swift in Sources */,
 				900F8C182545DC150098B07C /* Graphhopper.swift in Sources */,
 				31AC606A2545C99E00D52CA1 /* NegenTweeNegenTwee.swift in Sources */,
 				31BDB8A62540296E00D46059 /* Data.swift in Sources */,

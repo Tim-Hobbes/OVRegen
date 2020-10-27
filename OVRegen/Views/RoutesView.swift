@@ -34,13 +34,17 @@ struct RoutesView: View {
                 }
             }
         }.onAppear {
-            mainLogic().bikeOrOV(origin: planOrigin, destination: planDestination, timeToLeave: timeToLeave, rainHate: rainHate)
-        }.navigationBarTitle("Routes")
+            print("Hi, Dinand!")
+            NegenTweeNegenTweeApi().getRoutes(from: planOrigin, to: planDestination, departureTime: timeToLeave) { (journeys) in
+                self.journeys = journeys
+                print(journeys)
+            }
+        }
     }
 }
 
 struct RoutesView_Previews: PreviewProvider {
     static var previews: some View {
-        RoutesView(planOrigin: "Lieoever 54", planDestination: "Wolff en dekenlaan 1", timeToLeave: Date(), rainHate: 0.5)
+        RoutesView(planOrigin: "haarlem", planDestination: "groningen", timeToLeave: Date(), rainHate: 0.5)
     }
 }

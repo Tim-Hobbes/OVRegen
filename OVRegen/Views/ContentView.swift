@@ -36,8 +36,11 @@ struct ContentView: View {
                         Slider(value: $rainHate, in: 0...1, step: 0.01)
                     }
                 }
-                NavigationLink(destination: RoutesView(planOrigin: planOrigin, planDestination: planDestination, timeToLeave: timeToLeave, rainHate: rainHate)) {
-                    Text("Plan!?").font(.title)
+//                NavigationLink(destination: RoutesView(planOrigin: planOrigin, planDestination: planDestination, timeToLeave: timeToLeave, rainHate: rainHate)) {
+//                    Text("Plan!?").font(.title)
+////                }
+                NavigationLink(destination: ResultsView(planOrigin: planOrigin, planDestination: planDestination, timeToLeave: timeToLeave, rainHate: rainHate)) {
+                    Text("Plan").font(.title)
                 }
                 Spacer()
             }.navigationTitle("💦 🚌/🚴‍♀️ OVRegen")
