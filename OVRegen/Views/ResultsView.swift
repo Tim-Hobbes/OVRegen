@@ -33,7 +33,7 @@ struct ResultsView: View {
                 
                 Link(destination: URL(string: "https://www.google.com/maps/dir/?api=1&origin=\(planOrigin.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)&destination=\(planDestination.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)&travelmode=bicycling")!){
                     VStack{
-                    Text("Deze foto hieronder is een link naar google maps")
+                    Text("Klik hier voor een route beschrijving")
                     Image("Googlemap").resizable().scaledToFit().frame(width: 100, height: 100, alignment: .center)
                     }
                 }
