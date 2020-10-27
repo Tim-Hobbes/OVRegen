@@ -25,22 +25,36 @@ struct ResultsView: View {
                 Text("🚂")
                     .font(.system(size: 150))
                 Text("F*ck die regen, beter pak je het OV")
+                RoutesView(planOrigin: planOrigin, planDestination: planDestination, timeToLeave: timeToLeave, rainHate: rainHate)
             } else {
                 Text("🚲")
-                    .font(.system(size: 150))
+                    .font(.system(size: 100))
                 Text("Gozer je wordt geeneens nat")
+                
+                Link(destination: URL(string: "https://www.google.com/maps/dir/?api=1&origin=\(planOrigin.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)&destination=\(planDestination.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)&travelmode=bicycling")!){
+                    VStack{
+                    Text("Deze foto hieronder is een link naar google maps")
+                    Image("Googlemap").resizable().scaledToFit().frame(width: 100, height: 100, alignment: .center)
+                    }
+                }
+
             }
-            RoutesView(planOrigin: planOrigin, planDestination: planDestination, timeToLeave: timeToLeave, rainHate: rainHate)
-        }.onAppear {
+                
+
+    }.onAppear {
+            
             mainLogic().bikeOrOV(origin: planOrigin, destination: planDestination, timeToLeave: timeToLeave, rainHate: rainHate) { (result) in
                 trainOrBike = result
+                
             }
         }
+    
     }
-}
 
 
 struct ResultsView_Previews: PreviewProvider {
     static var previews: some View {
         ResultsView(planOrigin: "haarlem", planDestination: "Spaarndam", timeToLeave: Date(), rainHate: 0.2, trainOrBike: 0)    }
+}
+
 }

@@ -27,10 +27,14 @@ struct RoutesView: View {
     var body: some View {
         List(journeys) { journey in
             Link(destination: URL(string: journey.link!)!) {
-                VStack {
-                    Text("🚉").font(.title).multilineTextAlignment(.center)
-                    Text("Vertrektijd: \(journey.beginTime!, formatter: Self.routeDateFormat)")
-                    Text("Aankomsttijd: \(journey.arrivalTime!, formatter: Self.routeDateFormat)")
+                HStack{
+                    Spacer()
+                    VStack() {
+                        Text("🚉").font(.title).multilineTextAlignment(.center)
+                        Text("Vertrektijd: \(journey.beginTime!, formatter: Self.routeDateFormat)")
+                        Text("Aankomsttijd: \(journey.arrivalTime!, formatter: Self.routeDateFormat)")
+                    }
+                    Spacer()
                 }
             }
         }.onAppear {
