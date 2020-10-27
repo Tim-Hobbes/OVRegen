@@ -26,7 +26,7 @@ struct ResultsView: View {
                     .font(.system(size: 150))
                 Text("F*ck die regen, beter pak je het OV")
                 RoutesView(planOrigin: planOrigin, planDestination: planDestination, timeToLeave: timeToLeave, rainHate: rainHate)
-            } else {
+            } else if trainOrBike == 1 {
                 Text("🚲")
                     .font(.system(size: 100))
                 Text("Gozer je wordt geeneens nat")
@@ -38,6 +38,8 @@ struct ResultsView: View {
                     }
                 }
 
+            } else {
+                ProgressView()
             }
                 
 
