@@ -25,14 +25,16 @@ struct LatLong: Codable {
 }
 
 class mainLogic {
-    func bikeOrOV (origin: String, destination: String, timeToLeave: Date, rainHate: Double){
+    func bikeOrOV (origin: String, destination: String, timeToLeave: Date, rainHate: Double, competion: @escaping ([Journey]) -> ()){
         
       
         
 //        calculate the possible routes with the 9292 api
         NegenTweeNegenTweeApi().getRoutes(from: origin, to: destination, departureTime: timeToLeave) { (journeys) in
-//            OpenWeatherMapApi().getRain(journey: journeys[0])
-            print (journeys[0].link)
+            DispatchQueue.main.async {
+                print(journeys)
+                competion(journeys)
+            }
         }
     }
 }

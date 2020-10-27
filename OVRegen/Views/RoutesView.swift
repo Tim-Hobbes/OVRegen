@@ -39,7 +39,7 @@ struct RoutesView: View {
                 self.journeys = journeys
                 print(journeys)
             }
-        }
+        }.navigationBarTitle("Routes")
     }
 }
 
