@@ -31,7 +31,11 @@ struct ResultsView: View {
                 Text("Gozer je wordt geeneens nat")
             }
             RoutesView(planOrigin: planOrigin, planDestination: planDestination, timeToLeave: timeToLeave, rainHate: rainHate)
+        }.onAppear {
+            mainLogic().bikeOrOV(origin: planOrigin, destination: planDestination, timeToLeave: timeToLeave, rainHate: rainHate) { (result) in
+                trainOrBike = result
             }
+        }
     }
 }
 
